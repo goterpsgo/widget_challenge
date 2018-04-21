@@ -132,9 +132,6 @@ class WidgetViewTestCase(TestCase):
             format="json"
         )        
         size = Size.objects.get()
-        response = self.client.get(
-            reverse('size_details', kwargs={'pk': size.id}), format="json"
-        )
         
         # insert finish value for test
         self.finish_data = {'name': 'mauve'}
@@ -144,9 +141,6 @@ class WidgetViewTestCase(TestCase):
             format="json"
         )        
         finish = Finish.objects.get()
-        response = self.client.get(
-            reverse('finish_details', kwargs={'pk': finish.id}), format="json"
-        )
 
         # insert widget
         self.widget_data = {'name': 'test widget', 'inventory': 15, 'size': size.id, 'finish': finish.id}
@@ -199,7 +193,7 @@ class OrderViewTestCase(TestCase):
     def setUp(self):
         """Define the test client and other test variables."""
         self.client = APIClient()
-        self.order_data = {'name': 'ginormous'}
+        self.order_data = {}
         self.response = self.client.post(
             reverse('order_create'),
             self.order_data,
@@ -224,6 +218,91 @@ class OrderViewTestCase(TestCase):
         order = Order.objects.get()
         response = self.client.delete(
             reverse('order_details', kwargs={'pk': order.id}),
+            format='json',
+            follow=True
+        )
+        self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT)
+
+class OrderItemViewTestCase(TestCase):
+    """Test suite for the api views."""
+
+    # ===== TEST ORDERITEMS
+
+    def setUp(self):
+        """Define the test client and other test variables."""
+        self.client = APIClient()
+
+        # insert size value for test
+        self.size_data = {'name': 'ginormous'}
+        self.response = self.client.post(
+            reverse('size_create'),
+            self.size_data,
+            format="json"
+        )        
+        size = Size.objects.get()
+        
+        # insert finish value for test
+        self.finish_data = {'name': 'mauve'}
+        self.response = self.client.post(
+            reverse('finish_create'),
+            self.size_data,
+            format="json"
+        )        
+        finish = Finish.objects.get()
+
+        # insert widget
+        self.widget_data = {'name': 'test widget', 'inventory': 15, 'size': size.id, 'finish': finish.id}
+        self.response = self.client.post(
+            reverse('widget_create'),
+            self.widget_data,
+            format="json"
+        )
+        widget = Widget.objects.get()
+
+        # insert order
+        self.order_data = {}
+        self.response = self.client.post(
+            reverse('order_create'),
+            self.order_data,
+            format="json"
+        )
+        order = Order.objects.get()
+
+        self.orderitem_data = {'count': 1, 'widget': widget.id, 'order': order.id}
+        self.response = self.client.post(
+            reverse('orderitem_create'),
+            self.orderitem_data,
+            format="json"
+        )
+    
+    def test_api_can_create_a_orderitem(self):
+        """Test the api can create orderitems."""
+        self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
+
+    def test_api_can_get_a_orderitem(self):
+        """Test the api can get a given orderitem"""
+        orderitem = OrderItem.objects.get()
+        response = self.client.get(
+            reverse('orderitem_details', kwargs={'pk': orderitem.id}), format="json"
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, orderitem)
+
+    # def test_api_can_update_orderitem(self):
+    #     """Test the api can update a given orderitem"""
+    #     orderitem = OrderItem.objects.get()
+    #     change_orderitem = {'count': 22}
+    #     res = self.client.put(
+    #         reverse('orderitem_details', kwargs={'pk': orderitem.id}),
+    #         change_orderitem, format='json'
+    #     )
+    #     self.assertEqual(res.status_code, status.HTTP_200_OK)
+
+    def test_api_can_delete_orderitem(self):
+        """Test the api can delete a orderitem"""
+        orderitem = OrderItem.objects.get()
+        response = self.client.delete(
+            reverse('orderitem_details', kwargs={'pk': orderitem.id}),
             format='json',
             follow=True
         )
