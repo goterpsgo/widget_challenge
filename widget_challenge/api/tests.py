@@ -190,3 +190,41 @@ class WidgetViewTestCase(TestCase):
             follow=True
         )
         self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT)
+
+class OrderViewTestCase(TestCase):
+    """Test suite for the api views."""
+
+    # ===== TEST ORDERS
+
+    def setUp(self):
+        """Define the test client and other test variables."""
+        self.client = APIClient()
+        self.order_data = {'name': 'ginormous'}
+        self.response = self.client.post(
+            reverse('order_create'),
+            self.order_data,
+            format="json"
+        )
+    
+    def test_api_can_create_a_order(self):
+        """Test the api can create orders."""
+        self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
+
+    def test_api_can_get_a_order(self):
+        """Test the api can get a given order"""
+        order = Order.objects.get()
+        response = self.client.get(
+            reverse('order_details', kwargs={'pk': order.id}), format="json"
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, order)
+
+    def test_api_can_delete_order(self):
+        """Test the api can delete a order"""
+        order = Order.objects.get()
+        response = self.client.delete(
+            reverse('order_details', kwargs={'pk': order.id}),
+            format='json',
+            follow=True
+        )
+        self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT)
