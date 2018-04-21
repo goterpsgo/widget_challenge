@@ -1,11 +1,14 @@
 from django.conf.urls import url, include
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views import CreateView, DetailsView
+from .views import *
 
 urlpatterns = {
-    url(r'^finishes/$', CreateView.as_view(), name="create"),
+    url(r'^finishes/$', FinishCreateView.as_view(), name="create"),
     url(r'^finishes/(?P<pk>[0-9]+)/$',
-        DetailsView.as_view(), name="details"),
+        FinishDetailsView.as_view(), name="details"),
+    url(r'^sizes/$', SizeCreateView.as_view(), name="create"),
+    url(r'^sizes/(?P<pk>[0-9]+)/$',
+        SizeDetailsView.as_view(), name="details"),
 }
 
 urlpatterns = format_suffix_patterns(urlpatterns)

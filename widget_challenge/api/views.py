@@ -4,7 +4,7 @@ from rest_framework import generics
 from .serializers import FinishSerializer, SizeSerializer, WidgetSerializer, OrderSerializer, OrderItemSerializer
 from .models import Finish, Size, Widget, Order, OrderItem
 
-class CreateView(generics.ListCreateAPIView):
+class FinishCreateView(generics.ListCreateAPIView):
     """This class defines the create behavior of our REST API."""
     queryset = Finish.objects.all()
     serializer_class = FinishSerializer
@@ -13,7 +13,21 @@ class CreateView(generics.ListCreateAPIView):
         """Save the post data when creating a new bucketlist."""
         serializer.save()
 
-class DetailsView(generics.RetrieveUpdateDestroyAPIView):
+class FinishDetailsView(generics.RetrieveUpdateDestroyAPIView):
     """This class handles the http GET, PUT, and DELETE requests."""
     queryset = Finish.objects.all()
     serializer_class = FinishSerializer
+
+class SizeCreateView(generics.ListCreateAPIView):
+    """This class defines the create behavior of our REST API."""
+    queryset = Size.objects.all()
+    serializer_class = SizeSerializer
+
+    def perform_create(self, serializer):
+        """Save the post data when creating a new bucketlist."""
+        serializer.save()
+
+class SizeDetailsView(generics.RetrieveUpdateDestroyAPIView):
+    """This class handles the http GET, PUT, and DELETE requests."""
+    queryset = Size.objects.all()
+    serializer_class = SizeSerializer
