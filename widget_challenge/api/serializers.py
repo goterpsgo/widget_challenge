@@ -30,14 +30,14 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         """Meta class to map serializer's fields with the model fields."""
-        model = Widget
-        fields = ('id', 'name', 'inventory', 'finish', 'size', 'date_created', 'date_modified')
+        model = Order
+        fields = ('id', 'date_created', 'date_modified')
         read_only_fields = ('id', 'date_created', 'date_modified')
 
 class OrderItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         """Meta class to map serializer's fields with the model fields."""
-        model = Widget
+        model = OrderItem
         fields = ('id', 'count', 'order', 'widget', 'date_created', 'date_modified')
         read_only_fields = ('id', 'date_created', 'date_modified')
