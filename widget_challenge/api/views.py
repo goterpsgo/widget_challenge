@@ -4,44 +4,62 @@ from rest_framework import generics
 from .serializers import FinishSerializer, SizeSerializer, WidgetSerializer, OrderSerializer, OrderItemSerializer
 from .models import Finish, Size, Widget, Order, OrderItem
 
+# Views handling Finish class
 class FinishCreateView(generics.ListCreateAPIView):
-    """This class defines the create behavior of our REST API."""
     queryset = Finish.objects.all()
     serializer_class = FinishSerializer
 
     def perform_create(self, serializer):
-        """Save the post data when creating a new bucketlist."""
         serializer.save()
 
 class FinishDetailsView(generics.RetrieveUpdateDestroyAPIView):
-    """This class handles the http GET, PUT, and DELETE requests."""
     queryset = Finish.objects.all()
     serializer_class = FinishSerializer
 
+# Views handling Size class
 class SizeCreateView(generics.ListCreateAPIView):
-    """This class defines the create behavior of our REST API."""
     queryset = Size.objects.all()
     serializer_class = SizeSerializer
 
     def perform_create(self, serializer):
-        """Save the post data when creating a new bucketlist."""
         serializer.save()
 
 class SizeDetailsView(generics.RetrieveUpdateDestroyAPIView):
-    """This class handles the http GET, PUT, and DELETE requests."""
     queryset = Size.objects.all()
     serializer_class = SizeSerializer
 
+# Views handling Widget class
 class WidgetCreateView(generics.ListCreateAPIView):
-    """This class defines the create behavior of our REST API."""
     queryset = Widget.objects.all()
     serializer_class = WidgetSerializer
 
     def perform_create(self, serializer):
-        """Save the post data when creating a new bucketlist."""
         serializer.save()
 
 class WidgetDetailsView(generics.RetrieveUpdateDestroyAPIView):
-    """This class handles the http GET, PUT, and DELETE requests."""
     queryset = Widget.objects.all()
     serializer_class = WidgetSerializer
+
+# Views handling Order class
+class OrderCreateView(generics.ListCreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+class OrderDetailsView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+# Views handling Order class
+class OrderItemCreateView(generics.ListCreateAPIView):
+    queryset = OrderItem.objects.all()
+    serializer_class = OrderItemSerializer
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+class OrderItemDetailsView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = OrderItem.objects.all()
+    serializer_class = OrderItemSerializer
