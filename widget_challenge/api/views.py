@@ -31,3 +31,17 @@ class SizeDetailsView(generics.RetrieveUpdateDestroyAPIView):
     """This class handles the http GET, PUT, and DELETE requests."""
     queryset = Size.objects.all()
     serializer_class = SizeSerializer
+
+class WidgetCreateView(generics.ListCreateAPIView):
+    """This class defines the create behavior of our REST API."""
+    queryset = Widget.objects.all()
+    serializer_class = WidgetSerializer
+
+    def perform_create(self, serializer):
+        """Save the post data when creating a new bucketlist."""
+        serializer.save()
+
+class WidgetDetailsView(generics.RetrieveUpdateDestroyAPIView):
+    """This class handles the http GET, PUT, and DELETE requests."""
+    queryset = Widget.objects.all()
+    serializer_class = WidgetSerializer
