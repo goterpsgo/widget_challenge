@@ -1,6 +1,5 @@
 from django.test import TestCase
 
-from django.test import TestCase
 from .models import Finish, Size, Widget, Order, OrderItem
 from rest_framework.test import APIClient
 from rest_framework import status
@@ -96,8 +95,8 @@ class SizeViewTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertContains(response, size)
 
-    def test_api_can_update_finish(self):
-        """Test the api can update a given finish"""
+    def test_api_can_update_size(self):
+        """Test the api can update a given size"""
         size = Size.objects.get()
         change_size = {'name': 'itty-bitty'}
         res = self.client.put(
@@ -106,11 +105,87 @@ class SizeViewTestCase(TestCase):
         )
         self.assertEqual(res.status_code, status.HTTP_200_OK)
 
-    def test_api_can_delete_finish(self):
-        """Test the api can delete a finish"""
+    def test_api_can_delete_size(self):
+        """Test the api can delete a size"""
         size = Size.objects.get()
         response = self.client.delete(
             reverse('size_details', kwargs={'pk': size.id}),
+            format='json',
+            follow=True
+        )
+        self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT)
+
+class WidgetViewTestCase(TestCase):
+    """Test suite for the api views."""
+
+    # ===== TEST WIDGETS
+
+    def setUp(self):
+        """Define the test client and other test variables."""
+        self.client = APIClient()
+
+        # insert size value for test
+        self.size_data = {'name': 'ginormous'}
+        self.response = self.client.post(
+            reverse('size_create'),
+            self.size_data,
+            format="json"
+        )        
+        size = Size.objects.get()
+        response = self.client.get(
+            reverse('size_details', kwargs={'pk': size.id}), format="json"
+        )
+        
+        # insert finish value for test
+        self.finish_data = {'name': 'mauve'}
+        self.response = self.client.post(
+            reverse('finish_create'),
+            self.size_data,
+            format="json"
+        )        
+        finish = Finish.objects.get()
+        response = self.client.get(
+            reverse('finish_details', kwargs={'pk': finish.id}), format="json"
+        )
+
+        # insert widget
+        self.widget_data = {'name': 'test widget', 'inventory': 15, 'size': size.id, 'finish': finish.id}
+        self.response = self.client.post(
+            reverse('widget_create'),
+            self.widget_data,
+            format="json"
+        )
+    
+    def test_api_can_create_a_widget(self):
+        """Test the api can create widgets."""
+        self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
+
+    def test_api_can_get_a_widget(self):
+        """Test the api can get a given widget"""
+        widget = Widget.objects.get()
+        response = self.client.get(
+            reverse('widget_details', kwargs={'pk': widget.id}), format="json"
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, widget)
+
+    # def test_api_can_update_widget(self):
+    #     """Test the api can update a given widget"""
+    #     widget = Widget.objects.get()
+    #     print("[175] widget.name: " + str(widget.name))
+    #     change_widget = {'name': 'new and improved'}
+    #     res = self.client.put(
+    #         reverse('widget_details', kwargs={'pk': widget.id}),
+    #         change_widget, format='json'
+    #     )
+    #     print("[181] res: " + str(res))
+    #     self.assertEqual(res.status_code, status.HTTP_200_OK)
+
+    def test_api_can_delete_widget(self):
+        """Test the api can delete a widget"""
+        widget = Widget.objects.get()
+        response = self.client.delete(
+            reverse('widget_details', kwargs={'pk': widget.id}),
             format='json',
             follow=True
         )
