@@ -35,12 +35,13 @@ class Widget(models.Model):
 
 class Order(models.Model):
     """This class represents the orders."""
+
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     
     def __str__(self):
         """Return a human readable representation of the model instance."""
-        return "{}".format(self.name)
+        return "{}".format(self.id)
 
 class OrderItem(models.Model):
     """This class represents the items in the order."""
@@ -52,4 +53,4 @@ class OrderItem(models.Model):
     
     def __str__(self):
         """Return a human readable representation of the model instance."""
-        return "{}".format(self.name)
+        return "{}".format(self.order)
