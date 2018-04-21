@@ -1,8 +1,8 @@
 from django.shortcuts import render
 
 from rest_framework import generics
-from .serializers import FinishSerializer, SizeSerializer, WidgetSerializer, OrderSerializer, OrderItemSerializer
-from .models import Finish, Size, Widget, Order, OrderItem
+from .serializers import *
+from .models import *
 
 # Views handling Finish class
 class FinishCreateView(generics.ListCreateAPIView):
@@ -27,6 +27,21 @@ class SizeCreateView(generics.ListCreateAPIView):
 class SizeDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Size.objects.all()
     serializer_class = SizeSerializer
+
+# Views handling Category class
+class CategoryCreateView(generics.ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+class CategoryDetailsView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+    def perform_create(self, serializer):
+        serializer.save()
 
 # Views handling Widget class
 class WidgetCreateView(generics.ListCreateAPIView):
