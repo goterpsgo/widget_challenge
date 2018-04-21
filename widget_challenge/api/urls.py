@@ -12,6 +12,12 @@ urlpatterns = {
     url(r'^widgets/$', WidgetCreateView.as_view(), name="widget_create"),
     url(r'^widgets/(?P<pk>[0-9]+)/$',
         WidgetDetailsView.as_view(), name="widget_details"),
+    url(r'^orders/$', OrderCreateView.as_view(), name="order_create"),
+    url(r'^orders/(?P<pk>[0-9]+)/$',
+        OrderDetailsView.as_view(), name="order_details"),
+    url(r'^orderitems/$', OrderItemCreateView.as_view(), name="orderitem_create"),
+    url(r'^orderitems/(?P<pk>[0-9]+)/$',
+        OrderItemDetailsView.as_view(), name="orderitem_details"),
 }
 
 urlpatterns = format_suffix_patterns(urlpatterns)
