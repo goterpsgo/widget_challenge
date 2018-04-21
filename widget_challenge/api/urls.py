@@ -16,6 +16,7 @@ urlpatterns = {
     url(r'^orders/(?P<pk>[0-9]+)/$',
         OrderDetailsView.as_view(), name="order_details"),
     url(r'^orderitems/$', OrderItemCreateView.as_view(), name="orderitem_create"),
+    url(r'^widgets/(?P<pk>[0-9]+)/orderitems/$', OrderItemCreateView.as_view(), name="orderitem_create"),
     url(r'^orders/(?P<pk>[0-9]+)/orderitems/$', OrderItemCreateView.as_view(), name="orderitem_create"),
     url(r'^orderitems/(?P<pk>[0-9]+)/$',
         OrderItemDetailsView.as_view(), name="orderitem_details"),
