@@ -13,6 +13,10 @@ class FinishCreateView(generics.ListCreateAPIView):
         name = self.request.query_params.get('name', None)
         if name is not None:
             queryset = queryset.filter(name__icontains=name)
+        sort = self.request.query_params.get('sort', None)
+        desc = "-" if (self.request.query_params.get('desc', None)) else ""
+        if sort is not None:
+            queryset = queryset.order_by(desc + sort)
         return queryset
 
     def perform_create(self, serializer):
@@ -31,6 +35,10 @@ class SizeCreateView(generics.ListCreateAPIView):
         name = self.request.query_params.get('name', None)
         if name is not None:
             queryset = queryset.filter(name__icontains=name)
+        sort = self.request.query_params.get('sort', None)
+        desc = "-" if (self.request.query_params.get('desc', None)) else ""
+        if sort is not None:
+            queryset = queryset.order_by(desc + sort)
         return queryset
 
     def perform_create(self, serializer):
@@ -49,6 +57,10 @@ class CategoryCreateView(generics.ListCreateAPIView):
         name = self.request.query_params.get('name', None)
         if name is not None:
             queryset = queryset.filter(name__icontains=name)
+        sort = self.request.query_params.get('sort', None)
+        desc = "-" if (self.request.query_params.get('desc', None)) else ""
+        if sort is not None:
+            queryset = queryset.order_by(desc + sort)
         return queryset
 
     def perform_create(self, serializer):
@@ -71,6 +83,10 @@ class WidgetCreateView(generics.ListCreateAPIView):
         name = self.request.query_params.get('name', None)
         if name is not None:
             queryset = queryset.filter(name__icontains=name)
+        sort = self.request.query_params.get('sort', None)
+        desc = "-" if (self.request.query_params.get('desc', None)) else ""
+        if sort is not None:
+            queryset = queryset.order_by(desc + sort)
         return queryset
 
     def perform_create(self, serializer):
