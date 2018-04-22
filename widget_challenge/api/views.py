@@ -98,8 +98,15 @@ class WidgetDetailsView(generics.RetrieveUpdateDestroyAPIView):
 
 # Views handling Order class
 class OrderCreateView(generics.ListCreateAPIView):
-    queryset = Order.objects.all()
     serializer_class = OrderSerializer
+
+    def get_queryset(self):
+        queryset = Order.objects.all()
+        sort = self.request.query_params.get('sort', None)
+        desc = "-" if (self.request.query_params.get('desc', None)) else ""
+        if sort is not None:
+            queryset = queryset.order_by(desc + sort)
+        return queryset
 
     def perform_create(self, serializer):
         serializer.save()
@@ -110,8 +117,15 @@ class OrderDetailsView(generics.RetrieveUpdateDestroyAPIView):
 
 # Views handling Order class
 class OrderItemCreateView(generics.ListCreateAPIView):
-    queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
+
+    def get_queryset(self):
+        queryset = OrderItem.objects.all()
+        sort = self.request.query_params.get('sort', None)
+        desc = "-" if (self.request.query_params.get('desc', None)) else ""
+        if sort is not None:
+            queryset = queryset.order_by(desc + sort)
+        return queryset
 
     def perform_create(self, serializer):
         serializer.save()
