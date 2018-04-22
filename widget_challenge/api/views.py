@@ -6,8 +6,14 @@ from .models import *
 
 # Views handling Finish class
 class FinishCreateView(generics.ListCreateAPIView):
-    queryset = Finish.objects.all()
     serializer_class = FinishSerializer
+
+    def get_queryset(self):
+        queryset = Finish.objects.all()
+        name = self.request.query_params.get('name', None)
+        if name is not None:
+            queryset = queryset.filter(name__icontains=name)
+        return queryset
 
     def perform_create(self, serializer):
         serializer.save()
@@ -18,8 +24,14 @@ class FinishDetailsView(generics.RetrieveUpdateDestroyAPIView):
 
 # Views handling Size class
 class SizeCreateView(generics.ListCreateAPIView):
-    queryset = Size.objects.all()
     serializer_class = SizeSerializer
+
+    def get_queryset(self):
+        queryset = Size.objects.all()
+        name = self.request.query_params.get('name', None)
+        if name is not None:
+            queryset = queryset.filter(name__icontains=name)
+        return queryset
 
     def perform_create(self, serializer):
         serializer.save()
@@ -30,8 +42,14 @@ class SizeDetailsView(generics.RetrieveUpdateDestroyAPIView):
 
 # Views handling Category class
 class CategoryCreateView(generics.ListCreateAPIView):
-    queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
+    def get_queryset(self):
+        queryset = Category.objects.all()
+        name = self.request.query_params.get('name', None)
+        if name is not None:
+            queryset = queryset.filter(name__icontains=name)
+        return queryset
 
     def perform_create(self, serializer):
         serializer.save()
@@ -47,6 +65,13 @@ class CategoryDetailsView(generics.RetrieveUpdateDestroyAPIView):
 class WidgetCreateView(generics.ListCreateAPIView):
     queryset = Widget.objects.all()
     serializer_class = WidgetSerializer
+
+    def get_queryset(self):
+        queryset = Widget.objects.all()
+        name = self.request.query_params.get('name', None)
+        if name is not None:
+            queryset = queryset.filter(name__icontains=name)
+        return queryset
 
     def perform_create(self, serializer):
         serializer.save()
