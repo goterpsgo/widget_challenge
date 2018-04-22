@@ -11,9 +11,14 @@ urlpatterns = {
     url(r'^sizes/(?P<pk>[0-9]+)/$',
         SizeDetailsView.as_view(), name="size_details"),
 
+    url(r'^categories/$', CategoryCreateView.as_view(), name="category_create"),
+    url(r'^categories/(?P<pk>[0-9]+)/$',
+        CategoryDetailsView.as_view(), name="category_details"),
+
     url(r'^widgets/$', WidgetCreateView.as_view(), name="widget_create"),
     url(r'^finishes/(?P<pk>[0-9]+)/widgets/$', WidgetCreateView.as_view(), name="widget_create"),
     url(r'^sizes/(?P<pk>[0-9]+)/widgets/$', WidgetCreateView.as_view(), name="widget_create"),
+    url(r'^categories/(?P<pk>[0-9]+)/widgets/$', WidgetCreateView.as_view(), name="widget_create"),
     url(r'^widgets/(?P<pk>[0-9]+)/$',
         WidgetDetailsView.as_view(), name="widget_details"),
 
