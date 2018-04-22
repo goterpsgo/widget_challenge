@@ -20,12 +20,23 @@ class Size(models.Model):
         """Return a human readable representation of the model instance."""
         return "{}".format(self.name)
 
+class Category(models.Model):
+    """This class represents the widget categories."""
+    name = models.CharField(max_length=255, blank=False, unique=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        """Return a human readable representation of the model instance."""
+        return "{}".format(self.name)
+
 class Widget(models.Model):
     """This class represents the widget."""
     name = models.CharField(max_length=255, blank=False, unique=True)
     inventory = models.IntegerField(default=0, null=False, blank=False)
     finish = models.ForeignKey('Finish', on_delete=models.CASCADE)
     size = models.ForeignKey('Size', on_delete=models.CASCADE)
+    category = models.ForeignKey('Category', on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     
