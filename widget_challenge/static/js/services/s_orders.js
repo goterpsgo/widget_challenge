@@ -14,6 +14,8 @@
             , delete_order: delete_order
         };
 
+        return factory;
+
         function get_orders() {
             var deferred = $q.defer();
 

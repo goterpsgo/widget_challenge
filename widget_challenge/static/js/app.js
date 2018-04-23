@@ -8,9 +8,10 @@
         Object.assign(env, window.__env);
     }
 
-    var routerApp = angular.module('app', ['ui.router']);
-
-    routerApp.config(function($stateProvider) {
+    var routerApp = angular
+        .module('app', ['ui.router'])
+        .constant('__env', env)
+        .config(function($stateProvider) {
 
         $stateProvider
             .state('home', {
@@ -43,5 +44,6 @@
                 templateUrl: '/static/html/view_orders.html',
                 controller: 'orders_controller'
             })
-    });
+    })
+    ;
 })();

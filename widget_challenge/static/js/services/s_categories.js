@@ -3,23 +3,23 @@
 
     angular
         .module('app')
-        .factory('SizesService', Service);
+        .factory('CategoriesService', Service);
 
     function Service($http, $q, __env) {
         var factory = {
-              get_sizes: get_sizes
-            , get_size: get_size
-            , add_size: add_size
-            , update_size: update_size
-            , delete_size: delete_size
+              get_categories: get_categories
+            , get_category: get_category
+            , add_category: add_category
+            , update_category: update_category
+            , delete_category: delete_category
         };
 
         return factory;
 
-        function get_sizes() {
+        function get_categories() {
             var deferred = $q.defer();
 
-            $http.get(__env.api_url + ':' + __env.port + '/sizes')
+            $http.get(__env.api_url + ':' + __env.port + '/categories')
                 .then(
                     function(response) {
                         deferred.resolve(response.data);
@@ -32,10 +32,10 @@
             return deferred.promise;
         }
 
-        function get_size(id) {
+        function get_category(id) {
             var deferred = $q.defer();
 
-            $http.get(__env.api_url + ':' + __env.port + '/sizes/' + id)
+            $http.get(__env.api_url + ':' + __env.port + '/categories/' + id)
                 .then(
                     function(response) {
                         deferred.resolve(response.data);
@@ -48,7 +48,7 @@
             return deferred.promise;
         }
 
-        function add_size(form) {
+        function add_category(form) {
             var deferred = $q.defer();
             var config = {
                 headers : {
@@ -56,7 +56,7 @@
                 }
             };
 
-            $http.post(__env.api_url + ':' + __env.port + '/sizes', form_data, config)
+            $http.post(__env.api_url + ':' + __env.port + '/categories', form_data, config)
                 .then(
                     function(form_data) {
                         deferred.resolve(form_data);
@@ -68,7 +68,7 @@
             return deferred.promise;
         }
 
-        function update_size(form_data) {
+        function update_category(form_data) {
             var deferred = $q.defer();
             var config = {
                 headers : {
@@ -76,7 +76,7 @@
                 }
             };
 
-            $http.put(__env.api_url + ':' + __env.port + '/sizes/' + form_data.id, form_data, config)
+            $http.put(__env.api_url + ':' + __env.port + '/categories/' + form_data.id, form_data, config)
                 .then(function(response) {
                     deferred.resolve(response);
                 }
@@ -87,10 +87,10 @@
             return deferred.promise;
         }
 
-        function delete_size(id) {
+        function delete_category(id) {
             var deferred = $q.defer();
 
-            $http.delete(__env.api_url + ':' + __env.port + '/sizes/' + id)
+            $http.delete(__env.api_url + ':' + __env.port + '/categories/' + id)
                 .then(function(data, status, headers) {
                     deferred.resolve(data);
                 }

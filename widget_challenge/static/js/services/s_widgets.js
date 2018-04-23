@@ -14,6 +14,8 @@
             , delete_widget: delete_widget
         };
 
+        return factory;
+
         function get_widgets() {
             var deferred = $q.defer();
 

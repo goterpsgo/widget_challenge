@@ -2,7 +2,7 @@
 <html ng-app="app">
     <head>
         <title>{{_state_title}}</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" />
 
         <script language="javascript" src="https://cdn.jsdelivr.net/npm/angular@latest/angular.min.js"></script>
         <script language="javascript" src="https://cdn.jsdelivr.net/npm/angular-animate@latest/angular-animate.min.js"></script>
@@ -13,21 +13,23 @@
         <script language="javascript" src="/static/js/env.js"></script>
         <script language="javascript" src="/static/js/app.js"></script>
 
-        <!-- controllers -->
-        <script language="javascript" src="/static/js/controllers/c_widgets.js"></script>
-        <script language="javascript" src="/static/js/controllers/c_finishes.js"></script>
-        <script language="javascript" src="/static/js/controllers/c_sizes.js"></script>
-        <script language="javascript" src="/static/js/controllers/c_orders.js"></script>
-
         <!-- services -->
         <script language="javascript" src="/static/js/services/s_widgets.js"></script>
         <script language="javascript" src="/static/js/services/s_finishes.js"></script>
         <script language="javascript" src="/static/js/services/s_sizes.js"></script>
         <script language="javascript" src="/static/js/services/s_orders.js"></script>
         <script language="javascript" src="/static/js/services/s_orderitems.js"></script>
+        <script language="javascript" src="/static/js/services/s_categories.js"></script>
+
+        <!-- controllers -->
+        <script language="javascript" src="/static/js/controllers/c_widgets.js"></script>
+        <script language="javascript" src="/static/js/controllers/c_finishes.js"></script>
+        <script language="javascript" src="/static/js/controllers/c_sizes.js"></script>
+        <script language="javascript" src="/static/js/controllers/c_orders.js"></script>
+        <script language="javascript" src="/static/js/controllers/c_categories.js"></script>
     </head>
     <body>
-        <div>
+        <div class="container">
             <div ui-view></div>
         </div>
     </body>

@@ -14,6 +14,8 @@
             , delete_finish: delete_finish
         };
 
+        return factory;
+
         function get_finishes() {
             var deferred = $q.defer();
 

@@ -14,6 +14,8 @@
             , delete_size: delete_size
         };
 
+        return factory;
+
         function get_sizes() {
             var deferred = $q.defer();
 
