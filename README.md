@@ -16,3 +16,9 @@ The following endpoints are available: `finishes`, `sizes`, `categories`, `widge
  - The `widgets` have names as well as properties defined by `finishes`, `sizes`, `categories` through foreign keys.
  - The `orders` do not have any properties.
  - The `orderitems` have properties defined by `widgets` and `orders` through foreign keys. Both `widgets` and `orders` can have multiple `orderitems`.
+ 
+## Release Notes
+ - For the purposes of this exercise, the `SECRET_KEY` and `DEBUG` values in `widget_challenge/settings.py` have been left as is. The key value would not be included in a open repository in actual production software, and `DEBUG` would be set to `False`.
+ - The API is currently not able to return children of parent endpoints (e.g. `/finishes/1/widgets`). For this iteration, the visualization of these item collections will be handled by the front end.
+ - Queryset implementation in the views could be refactored to be made more concise. 
+ 
