@@ -19,7 +19,7 @@
         function get_orders() {
             var deferred = $q.defer();
 
-            $http.get(__env.api_url + ':' + __env.port + '/orders')
+            $http.get(__env.api_url + ':' + __env.port + '/orders/')
                 .then(
                     function(response) {
                         deferred.resolve(response.data);
@@ -35,7 +35,7 @@
         function get_order(id) {
             var deferred = $q.defer();
 
-            $http.get(__env.api_url + ':' + __env.port + '/orders/' + id)
+            $http.get(__env.api_url + ':' + __env.port + '/orders/' + id + '/')
                 .then(
                     function(response) {
                         deferred.resolve(response.data);
@@ -56,7 +56,7 @@
                 }
             };
 
-            $http.post(__env.api_url + ':' + __env.port + '/orders', form_data, config)
+            $http.post(__env.api_url + ':' + __env.port + '/orders/', form_data, config)
                 .then(
                     function(form_data) {
                         deferred.resolve(form_data);
@@ -76,7 +76,7 @@
                 }
             };
 
-            $http.put(__env.api_url + ':' + __env.port + '/orders/' + form_data.id, form_data, config)
+            $http.put(__env.api_url + ':' + __env.port + '/orders/' + form_data.id + '/', form_data, config)
                 .then(function(response) {
                     deferred.resolve(response);
                 }
@@ -90,7 +90,7 @@
         function delete_order(id) {
             var deferred = $q.defer();
 
-            $http.delete(__env.api_url + ':' + __env.port + '/orders/' + id)
+            $http.delete(__env.api_url + ':' + __env.port + '/orders/' + id + '/')
                 .then(function(data, status, headers) {
                     deferred.resolve(data);
                 }
