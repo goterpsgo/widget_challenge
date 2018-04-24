@@ -10,7 +10,8 @@
 
     var routerApp = angular
         .module('app', ['ui.router'])
-        .constant('__env', env)
+        .constant('__env', env) // environmental parameters for configuring client-side resources
+        .constant('_', window._)    // registering lodash with AngularJS
         .config(function($stateProvider) {
 
         $stateProvider
