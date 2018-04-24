@@ -12,6 +12,7 @@ Once the software is installed and the Django application server is running, the
  2. Clone this repo (`$ git clone <url> <some_other_optional_name>`)
  3. Create your virtual env (in Windows, run `$ pip source env/Scripts/activate`).
  4. Download needed packages (`$ pip install -r requirements.txt`).
+ 5. Create the test database instance (`$ python manage.py makemigrations; python manage.py migrate`)
  5. Start the application server (`$ cd widget_challenge; python manage.py runserver`)
  6. Access the API through the browser (`http://localhost:8000/`)
  7. Optional: run unit tests (`$ python manage.py test`)
