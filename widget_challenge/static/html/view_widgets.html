@@ -10,3 +10,72 @@
       Widgets
     </h1>
 </div>
+<div class="row">
+    <!-- list of items -->
+    <div class="col">
+      <table style="width: 300px;">
+          <thead>
+            <th>ID</th><th>Name</th>
+          </thead>
+          <tr ng-repeat="item in items">
+              <td><a href ng-click="edit_entry(item)">{{item.id}}</a></td><td>{{item.name}}</td>
+          </tr>
+      </table>
+    </div>
+    <!-- item details -->
+    <div class="col">
+        <form ng-submit="submit_form()">
+            <input type="hidden" ng-model="active_item.id" />
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" ng-model="active_item.name" require="true" maxlength="255" style="width: 250px;" /></td>
+                </tr>
+                <tr>
+                    <td>Inventory</td>
+                    <td><input type="text" ng-model="active_item.inventory" require="true" maxlength="255" style="width: 250px;" /></td>
+                </tr>
+                <tr>
+                    <td>Category</td>
+                    <td>
+                        <select ng-model="active_item.category" placeholder="Category" title="Category" style="width: 250px;">
+                            <option ng-repeat="_option in categories" ng-selected="active_item.category == _option.id" value="{{_option.id}}">
+                                {{_option.name}}
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Finish</td>
+                    <td>
+                        <select ng-model="active_item.finish" placeholder="Finish" title="Finish" style="width: 250px;">
+                            <option ng-repeat="_option in finishes" ng-selected="active_item.finish == _option.id" value="{{_option.id}}">
+                                {{_option.name}}
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Size</td>
+                    <td>
+                        <select ng-model="active_item.size" placeholder="Size" title="Size" style="width: 250px;">
+                            <option ng-repeat="_option in sizes" ng-selected="active_item.size == _option.id" value="{{_option.id}}">
+                                {{_option.name}}
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Submit" />
+                        <input type="reset" ng-click="reset_active_item()" />
+                        <input type="button" ng-click="delete_item(active_item)" value="Delete" ng-disabled="active_item.id == null" />
+                    </td>
+                </tr>
+            </table>
+
+        </form>
+    </div>
+</div>
+
