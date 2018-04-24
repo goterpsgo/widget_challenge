@@ -5,7 +5,7 @@ angular
     .controller('widgets_controller', _controller);
 
 function _controller($scope, __env, WidgetsService) {
-    $scope.results = [];
+    $scope.widgets = [];
 
     _init();
 
@@ -18,8 +18,7 @@ function _controller($scope, __env, WidgetsService) {
             .get_widgets()
             .then(
                 function(widgets) {
-                    $scope.results = widgets.results;
-                    console.log($scope.results);
+                    $scope.widgets = widgets.results;
                 }
             );
     }

@@ -5,7 +5,7 @@ angular
     .controller('orders_controller', _controller);
 
 function _controller($scope, __env, OrdersService) {
-    $scope.results = [];
+    $scope.orders = [];
 
     _init();
 
@@ -18,8 +18,7 @@ function _controller($scope, __env, OrdersService) {
             .get_orders()
             .then(
                 function(orders) {
-                    $scope.results = orders.results;
-                    console.log($scope.results);
+                    $scope.orders = orders.results;
                 }
             );
     }
