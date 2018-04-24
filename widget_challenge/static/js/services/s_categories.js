@@ -48,7 +48,7 @@
             return deferred.promise;
         }
 
-        function add_category(form) {
+        function add_category(form_data) {
             var deferred = $q.defer();
             var config = {
                 headers : {

@@ -48,7 +48,7 @@
             return deferred.promise;
         }
 
-        function add_widget(form) {
+        function add_widget(form_data) {
             var deferred = $q.defer();
             var config = {
                 headers : {

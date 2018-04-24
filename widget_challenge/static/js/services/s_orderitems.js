@@ -48,7 +48,7 @@
             return deferred.promise;
         }
 
-        function add_orderitem(form) {
+        function add_orderitem(form_data) {
             var deferred = $q.defer();
             var config = {
                 headers : {
