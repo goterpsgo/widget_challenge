@@ -10,3 +10,26 @@
       Categories
     </h1>
 </div>
+<div class="row">
+    <!-- list of items -->
+    <div class="col">
+      <table style="width: 300px;">
+          <thead>
+            <th>ID</th><th>Name</th>
+          </thead>
+          <tr ng-repeat="item in items">
+              <td><a href ng-click="edit_entry(item)">{{item.id}}</a></td><td>{{item.name}}</td>
+          </tr>
+      </table>
+    </div>
+    <!-- item details -->
+    <div class="col">
+        <form ng-submit="submit_form()">
+            <input type="number" ng-model="active_item.id" readonly size="3" />
+            <input type="text" ng-model="active_item.name" require="true" size="30" maxlength="255" />
+            <input type="submit" value="Submit" />
+            <input type="reset" ng-click="reset_active_item()" />
+            <input type="button" ng-click="delete_item(active_item)" value="Delete" ng-disabled="active_item.id == null" />
+        </form>
+    </div>
+</div>
