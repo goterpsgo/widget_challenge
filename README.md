@@ -31,4 +31,6 @@ The following endpoints are available: `finishes`, `sizes`, `categories`, `widge
  - The API is currently not able to return children of parent endpoints (e.g. `/finishes/1/widgets`). For this iteration, the visualization of these item collections will be handled by the front end.
  - Queryset implementation in the views could be refactored to be made more concise.
  - The REST API and SPA codebases can be deployed separately, but they were both included in the same project for simplicity of deployment. 
- - The hostname/IP address and port for the REST endpoints used by the SPA is currently set to `localhost:8000` and is stored in `widget_challenge/static/js/env.js`. This application, as currently configured, will function properly when installed and used from the same computer. 
+ - The hostname/IP address and port for the REST endpoints used by the SPA is currently set to `localhost:8000` and is stored in `widget_challenge/static/js/env.js`. This application, as currently configured, will function properly when installed and used from the same computer.
+ - A flash message needs to be added to let users know an action has taken place/error has been triggered.
+ - A confirmation message is needed when an item is about to be deleted. 
