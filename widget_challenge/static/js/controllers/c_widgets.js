@@ -102,8 +102,6 @@ function _controller($scope, WidgetsService, CategoriesService, FinishesService,
 
     $scope.edit_entry = function(item) {
         $scope.active_item = _.clone(item);
-        console.log("[105] ", $scope.active_item);
-        console.log("[106] ", $scope.active_item.category);
     };
 }
 
