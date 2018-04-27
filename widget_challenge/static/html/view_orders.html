@@ -17,15 +17,15 @@
           <thead>
             <th>ID</th><th>Name</th>
           </thead>
-          <tr ng-repeat="item in items">
-              <td><a href ng-click="edit_entry(item)">{{item.id}}</a></td><td>{{item.name}}</td>
+          <tr ng-repeat="order in orders">
+              <td><a href ng-click="edit_entry(item)">{{order.id}}</a></td><td></td>
           </tr>
       </table>
     </div>
     <!-- item details -->
     <div class="col">
-        <form ng-submit="submit_form()">
-            <input type="hidden" ng-model="active_item.id" />
+        <form ng-submit="submit_order()">
+            <input type="hidden" ng-model="active_order.id" />
             <table>
                 <tr>
                     <td>
@@ -35,15 +35,29 @@
                             </option>
                         </select>
                         <input type="number" ng-model="active_item.count" placeholder="Number of Items" title="Number of Items" style="width: 100px;">
-                        <input type="button" value="Add Item to Order" ng-click="add_item_to_order(active_item)" />
+                        <!--<input type="button" value="Add Item to Order" ng-click="add_item_to_order(active_item)" />-->
                     </td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>
-                        <input type="submit" value="Submit" />
+                        <input type="button" value="Add/Update item to Order" ng-click="submit_item_to_order()" />
                         <input type="reset" ng-click="reset_active_item()" />
-                        <input type="button" ng-click="delete_item(active_item)" value="Delete" ng-disabled="active_item.id == null" />
+                        <input type="button" ng-click="delete_item()" value="Delete Item" ng-disabled="active_item.id == null" />
+                    </td>
+                </tr>
+                <tr ng-repeat="item in active_order.items">
+                    <td></td>
+                    <td>
+                        <a href ng-click="update_order_item()">{{item.name}}</a> [count: {{item.count}}]
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Submit Order" />
+                        <input type="reset" ng-click="reset_active_order()" />
+                        <input type="button" ng-click="delete_order(active_order)" value="Delete Order" ng-disabled="active_order.id == null" />
                     </td>
                 </tr>
             </table>
