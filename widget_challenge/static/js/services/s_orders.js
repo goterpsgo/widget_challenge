@@ -9,6 +9,7 @@
         var factory = {
               get_orders: get_orders
             , get_order: get_order
+            , get_orderitems_from_order: get_orderitems_from_order
             , add_order: add_order
             , update_order: update_order
             , delete_order: delete_order
@@ -36,6 +37,22 @@
             var deferred = $q.defer();
 
             $http.get(__env.api_url + ':' + __env.port + '/orders/' + id + '/')
+                .then(
+                    function(response) {
+                        deferred.resolve(response.data);
+                    }
+                    , function(data, status, headers, config) {
+                        // deferred.resolve(response.data.response);
+                        deferred.resolve(JSON.parse('{"response": {"method": "GET", "result": "error", "status": "' + status + '"}}'));
+                    }
+                );
+            return deferred.promise;
+        }
+
+        function get_orderitems_from_order(id) {
+            var deferred = $q.defer();
+
+            $http.get(__env.api_url + ':' + __env.port + '/orders/' + id + '/orderitems/')
                 .then(
                     function(response) {
                         deferred.resolve(response.data);
