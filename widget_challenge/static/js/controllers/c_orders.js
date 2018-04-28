@@ -32,14 +32,32 @@ function _controller($scope, WidgetsService, OrdersService, OrderItemsService) {
     }
 
     function get_orders() {
+        $scope.orders = []; // clear orders queue before populating with resultset
+        // Get orders collection
         OrdersService
             .get_orders()
             .then(
                 function(orders) {
-                    $scope.orders = orders.results;
-                    $scope.orders.forEach(function(item) {
-                        OrderItemsService.get_orderitem()
-                    })
+                    orders.results.forEach(function(order) {
+                        // Get orderitems per order
+                        OrdersService
+                            .get_orderitems_from_order(order.id)
+                            .then(
+                                function(orderitems) {
+                                    // Get widget names per orderitem
+                                    orderitems.results.forEach(function(orderitem) {
+                                        var this_widget = _.find($scope.widgets, function(obj) {
+                                           return obj.id == parseInt(orderitem.widget);
+                                        });
+                                        orderitem.widget_name = this_widget.name;
+                                    });
+                                    // Assign orderitems to order object
+                                    order.orderitems = orderitems.results;
+                                    // Push order object to global orders queue
+                                    $scope.orders.push(order);
+                                }
+                            )
+                    });
                 }
             );
     }

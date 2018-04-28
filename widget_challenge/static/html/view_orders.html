@@ -19,6 +19,14 @@
           </thead>
           <tr ng-repeat="order in orders">
               <td><a href ng-click="edit_entry(item)">{{order.id}}</a></td><td></td>
+              <td style="vertical-align: top;">
+                  <table>
+                      <tr ng-repeat="item in order.orderitems">
+                          <td>{{item.widget_name}}</td>
+                          <td>{{item.count}}</td>
+                      </tr>
+                  </table>
+              </td><td></td>
           </tr>
       </table>
     </div>
