@@ -120,7 +120,21 @@ class OrderItemCreateView(generics.ListCreateAPIView):
     serializer_class = OrderItemSerializer
 
     def get_queryset(self):
+        # Set queryset to return all orderitems
         queryset = OrderItem.objects.all()
+
+        # capture view URL's path_info value
+        this_path = self.request.path_info
+
+        # if returning orderitems from orders...
+        if re.search("orders", this_path):
+            this_pk = this_path.split("/")[2]
+            queryset = Order.objects.get(pk=this_pk).orderitems.all()
+        # if returning orderitems from widgets...
+        if re.search("widgets", this_path):
+            this_pk = this_path.split("/")[2]
+            queryset = Widget.objects.get(pk=this_pk).orderitems.all()
+
         sort = self.request.query_params.get('sort', None)
         desc = "-" if (self.request.query_params.get('desc', None)) else ""
         if sort is not None:

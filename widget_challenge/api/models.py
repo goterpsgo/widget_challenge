@@ -57,7 +57,7 @@ class Order(models.Model):
 class OrderItem(models.Model):
     """This class represents the items in the order."""
     count = models.IntegerField(default=1, null=False, blank=False)
-    order = models.ForeignKey('Order', on_delete=models.CASCADE)
+    order = models.ForeignKey('Order', on_delete=models.CASCADE, related_name='orderitems')
     widget = models.ForeignKey('Widget', on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
