@@ -84,6 +84,7 @@ function _controller($scope, WidgetsService, OrdersService, OrderItemsService) {
 
     $scope.load_active_order = function(order) {
         $scope.active_order = order;
+        $scope.active_item = {};
     };
 
     $scope.submit_item_to_order = function() {
@@ -100,6 +101,9 @@ function _controller($scope, WidgetsService, OrdersService, OrderItemsService) {
         $scope.items.push(item);
     };
 
+    $scope.update_order_item = function(item) {
+        $scope.active_item = item;
+    };
     $scope.submit_order = function() {
         if ($scope.active_order.id != null) {
             OrdersService
