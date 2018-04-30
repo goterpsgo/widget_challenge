@@ -38,7 +38,7 @@
                 <tr>
                     <td>
                         <select ng-model="active_item.widget" placeholder="Widget" title="Widget" style="width: 250px;">
-                            <option ng-repeat="_option in widgets" value="{{_option.id}}">
+                            <option ng-repeat="_option in widgets" value="{{_option.id}}" ng-selected="active_item.widget == _option.id">
                                 {{_option.name}}
                             </option>
                         </select>
@@ -57,7 +57,7 @@
                 <tr ng-repeat="orderitem in active_order.orderitems">
                     <td></td>
                     <td>
-                        <a href ng-click="update_order_item()">{{orderitem.widget_name}}</a> [count: {{orderitem.count}}]
+                        <a href ng-click="update_order_item(orderitem)">{{orderitem.widget_name}}</a> [count: {{orderitem.count}}]
                     </td>
                 </tr>
                 <tr>
