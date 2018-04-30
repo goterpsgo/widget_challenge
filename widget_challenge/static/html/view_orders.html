@@ -18,7 +18,7 @@
             <th>ID</th><th>Name</th>
           </thead>
           <tr ng-repeat="order in orders">
-              <td><a href ng-click="edit_entry(item)">{{order.id}}</a></td><td></td>
+              <td><a href ng-click="load_active_order(order)">{{order.id}}</a></td><td></td>
               <td style="vertical-align: top;">
                   <table>
                       <tr ng-repeat="item in order.orderitems">
@@ -54,10 +54,10 @@
                         <input type="button" ng-click="delete_item()" value="Delete Item" ng-disabled="active_item.id == null" />
                     </td>
                 </tr>
-                <tr ng-repeat="item in active_order.items">
+                <tr ng-repeat="orderitem in active_order.orderitems">
                     <td></td>
                     <td>
-                        <a href ng-click="update_order_item()">{{item.name}}</a> [count: {{item.count}}]
+                        <a href ng-click="update_order_item()">{{orderitem.widget_name}}</a> [count: {{orderitem.count}}]
                     </td>
                 </tr>
                 <tr>
@@ -73,3 +73,4 @@
         </form>
     </div>
 </div>
+{{active_order}}

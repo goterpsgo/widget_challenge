@@ -8,7 +8,7 @@ function _controller($scope, WidgetsService, OrdersService, OrderItemsService) {
     $scope.orders = [];
     $scope.active_order = {
         id: null,
-        items: []
+        orderitems: []
     };
     $scope.items = [];
     $scope.widgets = [];
@@ -66,7 +66,7 @@ function _controller($scope, WidgetsService, OrdersService, OrderItemsService) {
         $scope.active_item = {};
         $scope.active_order = {
             id: null,
-            items: []
+            orderitems: []
         };
         get_orders();
     }
@@ -78,8 +78,12 @@ function _controller($scope, WidgetsService, OrdersService, OrderItemsService) {
     $scope.reset_active_order = function() {
         $scope.active_order = {
             id: null,
-            items: []
+            orderitems: []
         };
+    };
+
+    $scope.load_active_order = function(order) {
+        $scope.active_order = order;
     };
 
     $scope.submit_item_to_order = function() {
@@ -87,13 +91,9 @@ function _controller($scope, WidgetsService, OrdersService, OrderItemsService) {
         var this_widget = _.find($scope.widgets, function(obj) {
            return obj.id == parseInt($scope.active_item.widget);
         });
-        $scope.active_item.name = this_widget.name;
-        console.log($scope.active_item);
-        console.log($scope.active_order.items);
-        $scope.active_order.items.push($scope.active_item);
+        $scope.active_item.widget_name = this_widget.name;
+        $scope.active_order.orderitems.push($scope.active_item);
         $scope.reset_active_item();
-        console.log($scope.active_order.items);
-        // console.log('Got here');
     };
 
     $scope.add_item_to_order = function(item) {
@@ -116,7 +116,7 @@ function _controller($scope, WidgetsService, OrdersService, OrderItemsService) {
                 .then(
                     function(order) {
                         var order_id = order.data.id;
-                        $scope.active_order.items.forEach (function(item) {
+                        $scope.active_order.orderitems.forEach (function(item) {
                             delete item.name;   // name was only needed for display purposes
                             item.widget = parseInt(item.widget);
                             item.order = order_id;
